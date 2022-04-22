@@ -9,3 +9,15 @@ def solution(phone_book):
             return False
     
     return True
+
+
+# from collections import Counter 
+# def solution(phone_book):
+#     phone_book = Counter(phone_book)
+    
+#     for number in phone_book:
+#         while len(number) >= 1:
+#             tmp = number[:-1]
+#             if tmp in phone_book:
+#                 return False
+#     return True
