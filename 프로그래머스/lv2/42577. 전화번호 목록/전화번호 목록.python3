@@ -1,23 +1,26 @@
+# def solution(phone_book):
+#     # 정렬을 하게될 경우, 접두어는 해당 번호의 앞에 위치하게 됨.
+#     phone_book.sort()
+    
+#     # startswith() -> 문자열이 다른 문자열로 시작하는지 검사하는데 사용
+#     # 자매품은 endswith()
+#     for i in range(len(phone_book)-1):
+#         if phone_book[i+1].startswith(phone_book[i]):
+#             return False
+    
+#     return True
+
+# 취지에 맞게 해시로 풀어보자
+from collections import Counter 
 def solution(phone_book):
-    # 정렬을 하게될 경우, 접두어는 해당 번호의 앞에 위치하게 됨.
-    phone_book.sort()
+    book = Counter(phone_book)
     
-    # startswith() -> 문자열이 다른 문자열로 시작하는지 검사하는데 사용
-    # 자매품은 endswith()
-    for i in range(len(phone_book)-1):
-        if phone_book[i+1].startswith(phone_book[i]):
-            return False
-    
+    for number in book:
+        tmp = ''
+        for i in range(len(number)):
+            tmp += number[i]
+            
+            if tmp in book and tmp != number:
+                return False
     return True
 
-
-# from collections import Counter 
-# def solution(phone_book):
-#     phone_book = Counter(phone_book)
-    
-#     for number in phone_book:
-#         while len(number) >= 1:
-#             tmp = number[:-1]
-#             if tmp in phone_book:
-#                 return False
-#     return True
