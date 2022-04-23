@@ -1,0 +1,23 @@
+def solution(clothes):
+    # 딕셔너리에 각 종류의 옷이 몇가지인지 저장
+    dict = {}
+    for cloth in clothes:
+        if cloth[1] in dict:
+            dict[cloth[1]] += 1
+        else:
+            dict[cloth[1]] = 1
+        
+    # 딕셔너리의 키 구하기
+    tmp = list(dict.keys())
+    
+    # 옷을 조합하는 경우의 수 구하기
+    if len(tmp) == 1:
+        return dict[tmp[0]]
+    else: 
+        result = 1
+        for x in tmp: 
+            result *= (dict[x]+1)
+        return result-1
+    
+    
+    
