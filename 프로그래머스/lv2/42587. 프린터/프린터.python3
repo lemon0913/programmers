@@ -1,0 +1,17 @@
+from collections import deque
+def solution(priorities, location):
+    
+    priorities = deque(priorities)
+    idx = deque(range(len(priorities)))
+    cnt = 0
+    
+    while True:
+        if priorities[0] < max(priorities):
+            priorities.rotate(-1)
+            idx.rotate(-1)
+        else:
+            priorities.popleft()
+            cnt += 1
+            if idx.popleft() == location:
+                  break       
+    return cnt
