@@ -12,6 +12,7 @@
                 
 #     return answer
 
+
 def solution(citations):
     citations.sort(reverse=True)
     for idx , cit in enumerate(citations):
