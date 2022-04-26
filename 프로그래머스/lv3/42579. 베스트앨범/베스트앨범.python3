@@ -1,0 +1,60 @@
+# 런타임에러 발생
+# def solution(genres, plays):
+#     answer = []
+    
+#     # 장르별 재생 횟수를 내림차순으로 정렬
+#     dic = {}
+#     for i in range(len(plays)):
+#         if genres[i] not in dic:
+#             dic[genres[i]] = plays[i]
+#         else:
+#             dic[genres[i]] += plays[i]
+    
+#     dic = sorted(dic.items(), key = lambda x:-x[1])
+    
+
+#     # 각 장르별로 재생 횟수 정리해서 내림차순으로 정렬, 상위2개의 곡을 answer에 삽입
+#     play = {}
+#     for i in range(len(plays)):
+#         if genres[i] not in play:
+#             play[genres[i]] = [(i,plays[i])]
+#         else:
+#             play[genres[i]].append((i, plays[i]))
+    
+#     for i in range(len(dic)):
+#         play[dic[i][0]].sort(key = lambda x:-x[1])
+#         answer.append(play[dic[i][0]][0][0])
+#         answer.append(play[dic[i][0]][1][0])
+         
+#     return answer
+
+
+# 딕셔너리 2개를 동시에 정리해보자
+def solution(genres, plays):
+    answer = []
+
+    dic1 = {}
+    dic2 = {}
+    for i in range(len(plays)):
+        g = genres[i]
+        p = plays[i]
+        if g not in dic1:
+            dic1[g] = [(p, i)]
+            dic2[g] = p
+        else:
+            dic1[g].append((p, i))
+            dic2[g] += p
+            
+
+    dic2 = sorted(dic2.items(), key = lambda x:-x[1])
+
+    for d in dic2:
+        tmp = dic1[d[0]]
+        tmp.sort(key = lambda x:-x[0])
+        for i in range(len(tmp)):
+            if i == 2:
+                break
+            answer.append(tmp[i][1])
+            
+
+    return answer
