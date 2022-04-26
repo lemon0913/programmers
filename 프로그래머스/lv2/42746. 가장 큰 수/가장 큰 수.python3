@@ -1,0 +1,24 @@
+# # 이건 당연히..시간초과.....
+# from itertools import permutations
+# def solution(numbers):
+
+#     numbers = list(map(str, numbers))
+#     per = list(permutations(numbers, len(numbers)))
+    
+#     for i in range(len(per)):
+#         per[i] = ''.join(per[i])
+    
+#     return max(per)
+
+
+def solution(numbers):
+
+    numbers = list(map(str, numbers))
+    numbers.sort(key = lambda x:x*3, reverse = True)
+    return str(int(''.join(numbers)))
+# x*3이 제일 중요함..!
+# x*3을 하는 이유? -> num의 인수값이 1000 이하이므로 3자리수로 맞춘 뒤, 비교하겠다는 뜻.
+# 문자열 비교는 ASCII 값으로 치환되어 정렬된다. 따라서 666, 101010, 222의 첫번째 인덱스 값으로 비교한다. 
+
+
+
