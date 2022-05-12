@@ -1,0 +1,23 @@
+def solution(record):
+    answer = []
+    tmp = []
+    dic = {}
+    
+    for sentence in record:
+        words = sentence.split()
+        if words[0] == "Enter":
+            tmp.append((words[0], words[1]))
+            dic[words[1]] = words[2]
+        elif words[0] == "Leave":
+            tmp.append((words[0], words[1]))
+        else:
+            dic[words[1]] = words[2]
+    
+    
+    for t in tmp:
+        if t[0] == 'Enter':
+            answer.append(f'{dic[t[1]]}님이 들어왔습니다.')
+        else:
+            answer.append(f'{dic[t[1]]}님이 나갔습니다.')
+        
+    return answer
