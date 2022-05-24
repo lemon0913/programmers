@@ -1,0 +1,33 @@
+from collections import deque
+def solution(progresses, speeds):
+    answer = []
+    days = []
+    progresses = deque(progresses)
+    speeds = deque(speeds)
+    
+    # 남은 작업일을 모두 구해서 days 배열에 넣기
+    while speeds:
+        p = 100 - progresses.popleft()
+        s = speeds.popleft()
+        if p%s == 0:
+            days.append(p//s)
+        else:
+            days.append(p//s+1)
+    
+    # 기준이 되는 tmp보다 작거나 같은 수가 뒤에 몇개 나오는지 세서 answer에 넣기
+    # 기준보다 큰 수가 나오면 그 수를 기준으로 바꾸고 다시 세기
+    days = deque(days)
+    cnt = 1
+    tmp = days.popleft()
+    while days:
+        if tmp >= days[0]:
+            cnt += 1
+            days.popleft()
+        else:
+            answer.append(cnt)
+            tmp = days.popleft()
+            cnt = 1
+    answer.append(cnt)
+            
+        
+    return answer
