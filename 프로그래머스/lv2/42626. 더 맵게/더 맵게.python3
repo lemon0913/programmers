@@ -1,0 +1,35 @@
+# 런타임에러가 난다..?
+# import heapq
+# def solution(scoville, K):
+#     answer = 0
+    
+#     heapq.heapify(scoville)
+    
+#     while True:
+#         if scoville[0] >= K:
+#             break
+#         else:
+#             answer += 1
+#             min1 = heapq.heappop(scoville)
+#             min2 = heapq.heappop(scoville)
+#             heapq.heappush(scoville, min1+min2*2)
+    
+#     return answer
+
+# 런타임에러는 스코빌 리스트의 모든 원소로 변환과정을 거쳤음에도 K보다 크게 만들 수 없는 경우에 발생한 것...이에 따른 처리가 필요
+import heapq
+def solution(scoville, K):
+    answer = 0
+    
+    heapq.heapify(scoville)
+    
+    while scoville[0] < K:
+        if len(scoville) == 1:
+            return -1
+        else:
+            answer += 1
+            min1 = heapq.heappop(scoville)
+            min2 = heapq.heappop(scoville)
+            heapq.heappush(scoville, min1+min2*2)
+    
+    return answer
