@@ -1,3 +1,5 @@
+# 엥 이게 된다...??ㅋㅋㅋㅋㅋ
+# 약간...bfs의 응용 느낌으로 푼거긴한데....
 from collections import deque
 def solution(numbers, target):    
     
@@ -16,5 +18,27 @@ def solution(numbers, target):
     for n, c in queue:
         if n == target:
             answer += 1
+             
+    return answer
+
+
+# 다른 사람 풀이 찾아보니 나랑 비슷하게 풀긴 함
+# 다만 효율성을 더 높인 코드..
+from collections import deque
+def solution(numbers, target):    
+    
+    queue = deque([(numbers[0], 1), (numbers[0]*(-1), 1)])
+    l = len(numbers)
+    
+    answer = 0
+    while queue:
+        num, cnt = queue.popleft()
+        if cnt == l:
+            if num == target:
+                answer += 1       
+        else:
+            queue.append((num+numbers[cnt], cnt+1))
+            queue.append((num-numbers[cnt], cnt+1))
+        
              
     return answer
