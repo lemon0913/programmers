@@ -1,6 +1,6 @@
+# 이게 왜 레벨2..?? 1 같은데???
 def solution(s):
     
-    nums = list(map(int, s.split()))
-    answer = str(min(nums)) + ' ' + str(max(nums))
+    nums = list(map(int, s.split()))    
     
-    return answer
+    return str(min(nums)) + ' ' + str(max(nums))
