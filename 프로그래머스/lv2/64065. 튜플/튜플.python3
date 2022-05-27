@@ -1,0 +1,22 @@
+# 음...먼가 시간초과 날 것 같음.....ㅠㅜㅠㅜ
+def solution(s):
+    
+    answer = []
+    for i in range(1, len(s)-1):
+        if s[i] == '{':
+            t = ''
+        elif s[i] == '}':
+            answer.append(list(t.split(',')))
+        else:
+            t += s[i]
+    answer.sort(key = lambda x:len(x))
+
+    
+    result = []
+    result.append(int(answer[0][0]))
+
+    for i in range(1, len(answer)):
+        t = list(set(answer[i]) - set(answer[i-1]))
+        result.append(int(t[0]))
+        
+    return result
