@@ -1,0 +1,77 @@
+# 거의 맞췄는데!!!! 98점인데!!!!ㅠㅜㅠㅜㅠ
+
+# 해당 숫자가 소수인지 아닌지 판별하는 함수
+# def is_prime(n):
+#     if n == 1:
+#         return False
+#     for i in range(2, int(n**0.5)+1):
+#         if n % i == 0:
+#             return False
+#     return True
+
+
+# def solution(n, k):
+#     # 일단 k진수로 바꾸기
+#     result = ''
+#     while n > 0:
+#         result += str(n % k)
+#         n //= k
+#     result = result[::-1]
+    
+    
+#     answers = []
+#     tmp = ''
+#     for r in result:
+#         if r == '0':
+#             if tmp != '':
+#                 answers.append(int(tmp))
+#             tmp = ''
+#         else:
+#             tmp += r
+#     answers.append(int(tmp))
+    
+#     cnt = 0
+#     for a in answers:
+#         if is_prime(a) == True:
+#             cnt += 1
+    
+#     return cnt
+
+
+# 해당 숫자가 소수인지 아닌지 판별하는 함수
+def is_prime(n):
+    if n == 1:
+        return False
+    for i in range(2, int(n**0.5)+1):
+        if n % i == 0:
+            return False
+    return True
+
+
+def solution(n, k):
+    # 일단 k진수로 바꾸기
+    result = ''
+    while n > 0:
+        result += str(n % k)
+        n //= k
+    result = result[::-1]
+    
+    # 그냥 split으로 나눌 수 있는 거였다...ㅎㅎㅎㅎㅎㅎㅎ
+    tmp = ''
+    answer = result.split('0')
+    print(answer)
+    
+    cnt = 0
+    for a in answer:
+        if len(a) == 0:
+            continue
+        else:
+            if is_prime(int(a)) == True:
+                cnt += 1
+    
+    return cnt
+    
+
+        
+        
+        
