@@ -1,4 +1,5 @@
 # 이게 왜 레벨2..?? 1 같은데???
+# 비교적 쉬웠다.....
 def solution(s):
     
     nums = list(map(int, s.split()))    
