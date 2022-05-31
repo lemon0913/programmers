@@ -1,0 +1,31 @@
+def solution(n):
+    # n이 2진수일 때 1이 몇개인지 구하기
+    tmp = n
+    cnt1 = 0
+    while tmp > 0:
+        if tmp % 2 == 1:
+            cnt1 += 1
+        tmp //= 2
+    
+    # n보다 큰 자연수를 2진수로 바꿨을 때 1이 몇개인지 구하기
+    while True:
+        n += 1
+        tmp = n
+        cnt2 = 0
+        while tmp > 0:
+            if tmp % 2 == 1:
+                cnt2 += 1
+            tmp //= 2
+        if cnt1 == cnt2:
+            return n
+
+# # 더 간단한 방법으로 풀어보자
+# def solution(n):
+#     # n이 2진수일 때 1이 몇개인지 구하기
+#     cnt1 = bin(n).count('1')
+    
+#     # n보다 큰 자연수를 2진수로 바꿨을 때 1이 몇개인지 구하기
+#     while True:
+#         n += 1
+#         if bin(n).count('1') == cnt1:
+#             return n
