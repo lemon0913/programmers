@@ -1,0 +1,32 @@
+def solution(s):
+    
+    trans = 0 # 이진 변환 횟수
+    cnt = 0 # 제거된 모든 0의 개수
+    
+    while True:
+        trans += 1
+        
+        # 일단 0을 제거해보자..제거된 0의 개수도 구해보기
+        tmp = s.split('0')
+        tmp = ''.join(tmp)
+        
+        if tmp != s:
+            cnt += len(s) - len(tmp)
+        
+        
+        # 0을 제거한 수의 길이를 2진법으로 바꾸기 
+        tmp2 = ''
+        c = len(tmp)
+        while c>0:
+            tmp2 += str(c%2)
+            c //= 2
+        tmp2 = tmp2[::-1]
+        
+        # 그게 '1'이면 이진 변환 종료
+        if tmp2 == '1':
+            break
+        else:
+            s = tmp2
+
+        
+    return [trans,cnt]
