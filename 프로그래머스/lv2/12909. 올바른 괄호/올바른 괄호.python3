@@ -1,0 +1,17 @@
+# 괄호 회전을 먼저 풀어서 이건 쉽게 품
+def solution(s):
+    st = []
+    for ch in s:
+        if ch == '(':
+            st.append(ch)
+        else:
+            if not st:
+                return False
+            st.pop()
+    
+    if not st:
+        return True
+    else:
+        return False
+    
+    
