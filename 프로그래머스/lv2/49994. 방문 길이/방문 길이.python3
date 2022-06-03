@@ -1,0 +1,25 @@
+def solution(dirs):
+     
+    loc = [0,0] # 현재 위치
+    way = set() # 지금까지 지나온 경로를 저장하는 집합(중복된 경로는 포함안함)
+    for d in dirs:
+        if d == 'U' and loc[1] < 5:
+            way.add((loc[0], loc[1], loc[0], loc[1]+1))
+            way.add((loc[0], loc[1]+1, loc[0], loc[1]))
+            loc[1] += 1
+        elif d == 'D' and loc[1] > -5:
+            way.add((loc[0], loc[1], loc[0], loc[1]-1))
+            way.add((loc[0], loc[1]-1, loc[0], loc[1]))
+            loc[1] -= 1
+        elif d == 'R' and loc[0] < 5:
+            way.add((loc[0], loc[1], loc[0]+1, loc[1]))
+            way.add((loc[0]+1, loc[1], loc[0], loc[1]))
+            loc[0] += 1
+        elif d == 'L' and loc[0] > -5:
+            way.add((loc[0], loc[1], loc[0]-1, loc[1]))
+            way.add((loc[0]-1, loc[1], loc[0], loc[1]))
+            loc[0] -= 1
+        
+    
+    # way의 원소 개수 출력
+    return len(way)//2
