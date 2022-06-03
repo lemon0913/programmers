@@ -1,10 +1,18 @@
 # 이거는 처음에 감도 안왔었다..ㅠㅜㅠ
 # 역으로 생각하면 된다..n에서 0으로 만든다고 생각하자
+# def solution(n):
+#     ans = 0
+#     while n != 0:
+#         if n % 2 == 1:
+#             ans += 1
+#         n //= 2
+        
+#     return ans
+
 def solution(n):
     ans = 0
     while n != 0:
-        if n % 2 == 1:
-            ans += 1
+        ans += n%2
         n //= 2
         
     return ans
