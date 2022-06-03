@@ -1,0 +1,25 @@
+# 걍 개쉬운 문제 같았는데 시간초과.....어디서 시간을 줄여야하나...?????????ㅠㅜㅠㅜㅠ
+# def solution(n,a,b):
+#     answer = 1
+
+#     while True:
+#         a = (a+1)//2
+#         b = (b+1)//2
+#         answer += 1
+        
+#         if a%2 == 1 and a+1 == b:
+#             break
+        
+#     return answer
+
+# 같은 개념?의 풀이인데 좀 손볼 수 있다
+def solution(n,a,b):
+    answer = 0
+
+    while a!=b :
+        a = (a+1)//2
+        b = (b+1)//2
+        answer += 1
+        
+        
+    return answer
