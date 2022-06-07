@@ -1,0 +1,45 @@
+# (, ) 짝이 맞는지 검사하는 함수
+def right(p):
+    stack = []
+    
+    for i in p:
+        if i == '(':
+            stack.append(i)
+        else:
+            if not stack:
+                return False
+            if stack[-1] == '(':
+                stack.pop()
+    
+    if not stack:
+        return True
+    else:
+        return False
+            
+        
+def solution(p):
+    
+    if p == '':
+        return p
+    if right(p) == True:
+        return p
+    
+    for i in range(len(p)):
+        # w를 u와 v로 나누기
+        u = p[:i+1]
+        v = p[i+1:]
+        if u.count('(') == u.count(')'):
+            print(u)
+            print(v)
+            if right(u) == True: # u가 올바른 괄호 문자열이라면 v에 대해 1단계부터 수행
+                v = solution(v)
+                return u+v
+            else: # u가 올바른 괄호 문자열이 아님
+                answer = '('
+                answer += solution(v) + ')'
+                for j in range(1, len(u)-1):
+                    if u[j] == '(':
+                        answer += ')'
+                    else:
+                        answer += '('
+                return answer
