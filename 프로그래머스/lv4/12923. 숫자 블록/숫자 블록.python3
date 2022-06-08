@@ -1,0 +1,25 @@
+# 답은 다 나옴..근데 시간초과 뜸..
+# 아니 이것보다 어떻게 효율적으로 만드냐..??????????
+
+# 이제 효율성 테스트가 문제인데 시간초과도 아니고 실패 라고 한다.이유는 전체 도로의 길이는 10^9 이지만 블록의 숫자는 10^7 까지이다.몫이 10^7을 넘어가게 된다면 사실상 해당블록은 존재하지 않는다!!그러므로 몫이 10^7을 넘어가는 숫자는 스킵하고 그 보다 큰 숫자로 나눠서 10^7보다 작은 몫을 구해야 한다.    -----> answer에 들어갈 수 있는 값이 10^7이 최대
+
+
+def solution(begin, end):
+    answer = []
+    
+    for x in range(begin, end+1):
+        if x == 1:
+            answer.append(0)
+        else:    
+            for y in range(2,int(x**0.5)+1):
+                if x//y > 10000000:
+                    continue
+                if x%y == 0:
+                    answer.append(x//y)
+                    break
+            else:
+                answer.append(1)
+                
+        
+        
+    return answer
