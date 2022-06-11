@@ -1,0 +1,18 @@
+# 이건 스택을 사용하는 문제
+# 문제 풀기 전에 어떤 방법을 써야 하는건지 고민해보는 시간을 가지자
+from collections import deque
+def solution(skill, skill_trees):
+    answer = 0
+    
+    for skills in skill_trees:
+        stk = deque(skill)
+        
+        for s in skills:
+            if s in stk:
+                if s != stk.popleft():
+                    break
+        else:
+            answer += 1
+                
+    
+    return answer
