@@ -1,0 +1,11 @@
+# 그냥 수학문제인데..내가 수학을 못함..ㅠㅜ 
+# 풀이 포기..그냥 블로그 배낌
+# https://moondol-ai.tistory.com/423
+def solution(word):
+    char = {'A': 0, 'E': 1, 'I': 2, 'O': 3, 'U': 4}
+    answer = len(word) # A를 0으로 두었기 때문에 길이로 초기화 필요
+    re = (((5 + 1) * 5 + 1) * 5 + 1) * 5 + 1 # 781
+    for i in word:
+        answer += re * char[i] # 첫 문자가 무슨 글자로 시작하는지
+        re = (re - 1) // 5
+    return answer
