@@ -1,0 +1,33 @@
+from itertools import combinations
+def solution(relation):
+    
+    
+    # 후보키의 조합 구하기
+    t = list(range(len(relation[0])))
+    com = []
+    for i in range(1, len(relation[0])+1):
+        com += list(combinations(t, i))
+
+    
+    # 그 조합들로 후보키를 만들었을 때 유일성, 최소성을 만족하는지 확인
+    result = []
+    l = len(relation)
+    for co in com:
+        s = set()
+        for i in range(len(relation)):
+            t = ''
+            for c in co:
+                t += relation[i][c] + ' '                
+            s.add(t)
+        
+        if l == len(s): # 유일성을 만족하는 경우
+            for r in result: # 최소성도 만족하는지 확인
+                if set(r).issubset(set(co)):
+                    break
+            else:
+                result.append(co)
+    
+    
+        
+    
+    return len(result)
