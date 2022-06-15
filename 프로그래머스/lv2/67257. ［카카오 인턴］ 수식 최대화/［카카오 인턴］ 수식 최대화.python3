@@ -48,8 +48,7 @@ def solution(expression):
         
         answer.append(abs(stk[0]))
         
-            
-                    
-                
     
     return max(answer)
+
+# 간만에 해설 하나도 안보고 온전히 혼자 힘으로 해결했다ㅠㅜㅠㅜㅠㅜ
