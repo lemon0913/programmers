@@ -1,3 +1,5 @@
+# 최소성 때문에 풀이 보고 품..
+# issubset()
 from itertools import combinations
 def solution(relation):
     
