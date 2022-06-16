@@ -1,3 +1,5 @@
+# 남의 풀이 안보고 맞춤ㅜㅠㅜ
+# 규칙도 스스로 찾아냄ㅠㅜㅠㅠㅜ대견하다ㅠㅜㅠ
 def solution(n):
     graph = []
     for i in range(1,n+1):
@@ -25,7 +27,8 @@ def solution(n):
                 x += 1
             up += 1
         t += 1
-        
+     
+    
     answer = []
     for g in graph:
         answer.extend(g)
