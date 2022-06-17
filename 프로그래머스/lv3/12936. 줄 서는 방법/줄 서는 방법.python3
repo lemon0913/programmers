@@ -1,6 +1,17 @@
 # 개 쉬운 문제라고 생각했는데 효율성에서 다 탈락...시간초과 뜸..
 # 아마 n이 20이하라서 순열을 쓰면 경우의 수가 너무 커져서 그런듯
-# 근데 여기서 시간을 어캐 줄임..??
+# from itertools import permutations
+# def solution(n, k):
+    
+#     nums = list(range(1, n+1))
+#     answer = list(permutations(nums, n))
+    
+    
+#     return answer[k-1]
+
+
+
+# 근데 여기서 시간을 어캐 줄임..?? -> 순열 안쓰면 된다..ㅎㅎ
 def solution(n, k):
     answer = []
     nums = list(range(1, n+1))
@@ -17,14 +28,10 @@ def solution(n, k):
         if len(nums) == 1:
             answer.append(nums[0])
             break
-
-        
+   
         k %= t
         if k == 0:
             k = t
         
-
-        
-    
-    
     return answer
+
