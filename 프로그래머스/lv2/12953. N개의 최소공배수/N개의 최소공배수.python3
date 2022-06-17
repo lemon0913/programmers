@@ -1,0 +1,13 @@
+# 아주 놀라운 사실...프로그래머스에서는 gcd()는 지원하나 lcm()은 지원하지 않는다고 한다...
+# 그래서 gcd()를 사용해 lcd를 구해야 한다..!!!!!
+#  A와 B의 최소공배수 = A * B / A와 B의 최대공약수
+import math
+def solution(arr):
+    
+    answer = 1
+    for a in arr:
+        answer = answer*a // math.gcd(answer,a)
+
+    return answer
+
+
