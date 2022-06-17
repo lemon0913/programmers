@@ -1,3 +1,4 @@
+# 걍 쉽게 품....
 def solution(A,B):
     answer = 0
 
