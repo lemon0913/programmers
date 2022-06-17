@@ -1,0 +1,30 @@
+# 개 쉬운 문제라고 생각했는데 효율성에서 다 탈락...시간초과 뜸..
+# 아마 n이 20이하라서 순열을 쓰면 경우의 수가 너무 커져서 그런듯
+# 근데 여기서 시간을 어캐 줄임..??
+def solution(n, k):
+    answer = []
+    nums = list(range(1, n+1))
+    
+    while True:
+        t = 1
+        for i in range(1,len(nums)):
+            t *= i
+        
+        idx = (k-1)//t
+        answer.append(nums[idx])
+        del nums[idx]
+        
+        if len(nums) == 1:
+            answer.append(nums[0])
+            break
+
+        
+        k %= t
+        if k == 0:
+            k = t
+        
+
+        
+    
+    
+    return answer
