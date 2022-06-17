@@ -1,0 +1,58 @@
+# 정수 i를 n진수로 바꾼 결과를 반환
+def jinsu(n, i):
+    answer = ''
+    arr = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 'A', 'B', 'C', 'D', 'E', 'F']
+    
+    if i == 0:
+        return '0'
+    
+    if 2 <= n <= 9:
+        while i > 0:
+            answer += str(i%n)
+            i //= n
+    
+    elif n == 10:
+        answer = str(i)
+    
+    else:
+        while i > 0:
+            t = i%n
+            if t >= 10:
+                answer += arr[t]
+            else:
+                answer += str(t)
+            i //= n
+    
+    answer = answer[::-1]
+    
+    return answer
+            
+# n진수로 바꾸는 함수는 잘 구현한 것 같은데........
+# result 배열을 못 구하겠다....
+def solution(n, t, m, p):
+    answer = ''
+    
+    cnt = p-1
+    result = ''
+    x = 0
+    while True:
+        result += jinsu(n, x)
+        
+        if len(result) < cnt+1:
+            pass
+        else:
+            answer += result[cnt]
+            if len(answer) == t:
+                break
+            cnt += m
+        
+        x += 1
+
+
+        
+        
+    
+    return answer
+    
+        
+    
