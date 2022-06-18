@@ -1,0 +1,53 @@
+# 어렵다...어떤식으로 구현해야 하는건지 모르겠다.....
+# 딕셔너리에 dic['lanfieldcareerfood'] = [grade]의 형태로 저장하는 것은 맞음
+# 대신 딕셔너리에 저장하는 키 값으로 앞의 4부분으로 만들 수 있는 조합을 사용하는 것을 생각 못 해냄...
+# bisect 모듈!!!! 이분 탐색 모듈이다!!! 앞으로 겁나 겁나 긴 배열을 탐색 할 일이 생기면 이분 탐색 모듈 사용하자!!!!!!!!!
+# 얘는 그래도 나중에 다시 풀라고 하면 풀 수 있을듯..??
+from itertools import combinations
+from bisect import bisect_left
+def solution(info, query):
+    answer = []
+    
+    dic = {}
+    for i in info:
+        #info의 내용을 점수, 점수 이전의 내용으로 나누기
+        inf = i.split( )
+        mykey = inf[:-1] 
+        myvalue = inf[-1]
+        
+        # 점수 이전의 내용으로 만들 수 있는 모든 조합 구하기
+        # 딕셔너리에 dic[점수 이전의 내용으로 만들 수 있는 모든 조합] = 점수 의 형태로 저장
+        for j in range(5):
+            for c in combinations(mykey,j): 
+                tmp = ''.join(c)
+                if tmp not in dic:
+                    dic[tmp] = [int(myvalue)]
+                else:
+                    dic[tmp].append(int(myvalue))
+    
+    # 딕셔너리에 저장된 점수들을 오름차순으로 정렬 -> 나중에 이진탐색 할거라서 그럼
+    for k in dic:
+        dic[k].sort()
+    
+    # query도 비슷한 작업 수행
+    for qu in query:
+        q = qu.split()
+        q_key = q[:-1]
+        q_value = q[-1]
+        
+        while 'and' in q_key:
+            q_key.remove('and')
+        while '-' in q_key:
+            q_key.remove('-')
+        
+        tmp = ''.join(q_key)
+        
+        # query에서 구한 key값이 존재 한다면
+        if tmp in dic: # value값 이상으로 점수를 받은 사람의 수 구하기
+            answer.append(len(dic[tmp])-bisect_left(dic[tmp],int(q_value)))
+        else: 
+            answer.append(0)
+        
+        
+    
+    return answer
