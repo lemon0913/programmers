@@ -1,0 +1,88 @@
+# 이거!!!! 기본 dfs/bfs 문제!!! 이거 못 풀면 자존심이 상하는데ㅔㅔ
+#### 이거 다익스트라임...딸딸 외우자ㅏㅏ!!!!
+# from collections import deque
+# def solution(N, road, K):
+#     answer = 0
+
+#     graph = [[] for _ in range(N+1)]
+#     for r in road:
+#         a, b, c = r
+#         graph[a].append((b,c))
+#         graph[b].append((a,c))
+    
+#     for g in graph:
+#         g.sort()
+        
+#     visited = [False]*(N+1)
+    
+#     def bfs(start):
+#         q = deque([start])
+#         visited[start] = 0
+        
+#         while q:
+#             n = q.popleft()
+#             for x in graph[n]:
+#                 if not visited[x[0]]:
+#                     visited[x[0]] = visited[n] + x[1]
+#                     q.append(x[0])
+    
+#     bfs(1)
+    
+#     visited[1] = 0
+#     visited = visited[1:]
+
+    
+#     for v in visited:
+#         if v <= K:
+#             answer += 1
+        
+
+#     return answer
+
+
+# 다익스트라 기본 유형..! 딸딸 외우자!
+import heapq
+import sys
+input = sys.stdin.readline
+INF = int(1e9)
+def solution(N, road, K):
+    answer = 0
+    
+    graph = [[] for _ in range(N+1)]
+    for r in road:
+        a, b, c = r
+        graph[a].append((b,c))
+        graph[b].append((a,c))
+        
+    visited = [INF]*(N+1)
+    
+    def dijkstra(start):
+        q = []
+        visited[start] = 0
+        heapq.heappush(q,(0,start))
+        
+        while q:
+            dist, now = heapq.heappop(q)
+            
+            if visited[now] < dist:
+                continue
+            
+            for i in graph[now]:
+                cost = dist + i[1]
+                
+                if cost < visited[i[0]]:
+                    visited[i[0]] = cost
+                    heapq.heappush(q,(cost,i[0]))
+    dijkstra(1)
+    
+    for v in visited:
+        if v <= K:
+            answer += 1
+    
+    return answer
+
+
+
+
+    
+
