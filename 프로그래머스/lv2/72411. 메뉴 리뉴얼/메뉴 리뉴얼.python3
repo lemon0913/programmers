@@ -1,0 +1,29 @@
+# 이건 어떻게 구현할 지 감도 안 옴...
+# 그냥......어려운거 아니였다...ㅋㅋㅋㅋㅋㅋㅋㅋ
+# 조합을 사용해서 메뉴 구성의 모든 종류를 구하고 각 종류가 몇 번 나왔는지 세면 됨
+# dictionary만 쓰지 말고 Counter도 쓰자!! 훨씬 편하다!!!
+from itertools import combinations
+from collections import Counter
+def solution(orders, course):
+    answer = []
+    
+    # 코스의 길이마다 생겨날 수 있는 모든 조합 구하기
+    for c in course:
+        tmp = []
+        for o in orders:
+            o = sorted(o)
+            tmp.extend(list(combinations(o, c)))
+    
+        # 각 조합이 나타난 갯수 구하기
+        count = Counter(tmp)
+        
+        # 조합의 최빈값을 구하고 최빈값과 같은 횟수로 나타난 조합은 answer에 넣기
+        if count:
+            m = max(count.values())
+            if m >= 2:
+                for k, v in count.items():
+                    if v == m:
+                        answer.append(''.join(k))
+            
+    
+    return sorted(answer)
