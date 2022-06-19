@@ -1,0 +1,68 @@
+# 시간 초과가 날 것 같았고....당연하게도 났다....ㅋㅋㅋㅋ큐ㅜㅠㅜㅠ
+# def solution(numbers):
+#     answer = []
+    
+#     # 2진수로 바꾸는 함수
+#     def jinsu(x):
+#         answer = ''
+#         while x > 0:
+#             answer += str(x%2)
+#             x //=2
+        
+#         answer += '0'*(8-len(answer))
+               
+#         return answer[::-1]
+    
+#     for n1 in numbers:
+#         nt = jinsu(n1)
+        
+#         n2 = n1+1
+#         while True:
+#             n2t = jinsu(n2)
+
+#             cnt = 0
+#             for i in range(len(n2t)):
+#                 if nt[i] != n2t[i]:
+#                     cnt += 1
+            
+  
+#             if cnt <= 2:
+#                 answer.append(n2)
+#                 break
+            
+#             n2 += 1
+        
+#     return answer
+
+
+
+# 걍 냅다 푸는게 아니다...그리디 유형이었음..ㅋㅋㅋ큐ㅜㅠㅜㅠ
+# 1) 만약 x가 짝수다?? 그럼 맨 끝자리가 0으로 끝남..걔만 1로 바꾸면 되기 때문에 f(x) = x+1이다
+# 2) 만약 x가 홀수다?? 그럼 가장 뒤에 있는 0의 인덱스(idx)를 찾아 1로 바꾸고 idx+1을 0으로 바꾸면 된다! 
+def solution(numbers):
+    answer = []
+    
+    for n in numbers:
+        if n % 2 == 0:
+            answer.append(n+1)
+        else:
+            # 2진수로 바꾸기
+            t = ''
+            while n > 0:
+                t += str(n%2)
+                n //=2
+            t += '0'
+            
+            # 가장 뒤에 있는 0의 인덱스(idx)를 찾아 1로 바꾸고 idx+1을 0으로 바꾸기
+            idx = t.find('0')
+            t = list(t)
+            t[idx] = '1'
+            t[idx-1] = '0'
+            
+            
+            # 2진수 다시 10진수로 바꾸기
+            answer.append(int(''.join(t[::-1]),2))
+                  
+    
+        
+    return answer
