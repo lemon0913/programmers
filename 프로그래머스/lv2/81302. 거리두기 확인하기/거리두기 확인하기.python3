@@ -1,3 +1,4 @@
+# 처음엔 dfs/bfs인가? 했는데 아니었다....그냥 P인 곳 마다 거리두기가 된건지 확인만 하면 됨
 def test(lst, x,y):
     
     arr1 = [(-1,0), (1,0), (0,1), (0,-1)]
@@ -37,14 +38,28 @@ def test(lst, x,y):
     return True
 
 
-def tmp(place):     
-    for x in range(5):
-        for y in range(5):
-            if place[x][y] == 'P':
-                if not test(place, x, y):
-                    return False
+# def tmp(place):     
+#     for x in range(5):
+#         for y in range(5):
+#             if place[x][y] == 'P':
+#                 if not test(place, x, y):
+#                     return False
         
-    return True
+#     return True
+
+
+
+# def solution(places):
+#     answer = []
+    
+#     for place in places:
+#         if tmp(place):
+#             answer.append(1)
+#         else:
+#             answer.append(0)
+        
+            
+#     return answer
 
 
 
@@ -52,10 +67,18 @@ def solution(places):
     answer = []
     
     for place in places:
-        if tmp(place):
-            answer.append(1)
+        flag = True
+        for x in range(5):
+            for y in range(5):
+                if place[x][y] == 'P':
+                    flag = test(place, x, y)
+                    if not flag:
+                        answer.append(0)
+                        break
+            if not flag:
+                break
         else:
-            answer.append(0)
+            answer.append(1)
         
             
     return answer
