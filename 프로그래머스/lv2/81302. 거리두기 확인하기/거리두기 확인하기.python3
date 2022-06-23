@@ -1,0 +1,61 @@
+def test(lst, x,y):
+    
+    arr1 = [(-1,0), (1,0), (0,1), (0,-1)]
+    arr2 = [((-2, 0, -1, 0)), (2, 0, 1, 0), (0, 2, 0, 1), (0, -2, 0, -1)]
+    arr3 = [(-1, -1, -1, 0, 0, -1), (1, -1, 1, 0, 0, -1), (1, 1, 1, 0, 0, 1), (-1, 1, -1, 0, 0, 1)]
+    
+    for arr in arr1:
+        a, b = arr
+        nx = x + a
+        ny = y + b
+        
+        
+        if 0 <= nx < 5 and 0 <= ny < 5:
+            if lst[nx][ny] == 'P':
+                return False
+                
+    
+    for arr in arr2:
+        a, b, c, d = arr
+        nx = x + a
+        ny = y + b
+        
+        if 0 <= nx < 5 and 0 <= ny < 5:
+            if lst[nx][ny] == 'P' and lst[x+c][y+d] == 'O':
+                return False
+    
+    for arr in arr3:
+        a, b, c, d, e, f = arr
+        nx = x + a
+        ny = y + b
+        
+        if 0 <= nx < 5 and 0 <= ny < 5:
+            if lst[nx][ny] == 'P':
+                if lst[x+c][y+d] == 'O' or lst[x+e][y+f] == 'O' :
+                    return False
+    
+    return True
+
+
+def tmp(place):     
+    for x in range(5):
+        for y in range(5):
+            if place[x][y] == 'P':
+                if not test(place, x, y):
+                    return False
+        
+    return True
+
+
+
+def solution(places):
+    answer = []
+    
+    for place in places:
+        if tmp(place):
+            answer.append(1)
+        else:
+            answer.append(0)
+        
+            
+    return answer
