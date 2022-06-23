@@ -62,7 +62,7 @@ def test(lst, x,y):
 #     return answer
 
 
-
+# tmp 함수 굳이 안쓸 수 있음
 def solution(places):
     answer = []
     
