@@ -1,0 +1,44 @@
+def solution(str1, str2):
+
+    
+    # 대소문자는 구별 안한다고 했으니 일단 다 대문자로 바꾸자
+    str1 = str1.upper()
+    str2 = str2.upper()
+    
+    arr1 = []
+    t1 = []
+    for i in range(len(str1)-1):   
+        tmp = str1[i:i+2]
+        
+        if tmp.isalpha():
+            arr1.append(tmp)
+            if arr1.count(tmp) != 1:
+                t1.append(tmp+str(arr1.count(tmp)))
+            else:
+                t1.append(tmp)
+            
+    
+    arr2 = []
+    t2 = []
+    for i in range(len(str2)-1):   
+        tmp = str2[i:i+2]
+        
+        if tmp.isalpha():
+            arr2.append(tmp)
+            if arr2.count(tmp) != 1:
+                t2.append(tmp+str(arr2.count(tmp)))
+            else:
+                t2.append(tmp)
+    
+    
+    if len(t1) == 0 and len(t2) == 0:
+        return 65536
+    
+    t1 = set(t1)
+    t2 = set(t2)
+    
+    
+    answer = int(len(t1&t2)/len(t1|t2)*65536)    
+        
+        
+    return answer
