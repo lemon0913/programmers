@@ -1,0 +1,35 @@
+# dfs/bfs 일 것 같은데...감이 안 옴....ㅎㅎㅎ
+# dfs 백트래킹(조건이 유망하지 않다면 취소하고 다른 경우를 생각하기)
+# 조건 1 : 같은 열 체크
+#   col[i] : i번째 행에서 퀸이 놓여 있는 열의 위치
+#   col[k] : k번째 행에서 퀸이 놓여 있는 열의 위치
+#   col[i]와 col[k]가 같다면 유망하지 않음
+# 조건 2: 대각선 체크
+#   왼쪽 퀸과 열에서의 차이는 행의 차이와 같다 => col[i]-col[k] == i-k
+#   오른쪽 퀸과 열에서의 차이는 행에서의 차이의 마이너스와 같다 => col[i]-col[k] == k-i
+#   따라서 col[i]-col[k]의 절대값으로 대각선 조건을 체크한다..
+# queen 배열은 각 index가 row이고 해당 value가 column이라고 생각하면 된다.예를들어, [1, 3, 0, 2]라면 [0, 1], [1, 3], [2, 2], [3, 2]에 queen이 배치되어있다.
+
+# 이거 다시 못 품....절대 못 품...ㅎㅎ
+def dfs(queen, row, n):
+    count = 0
+    if n == row:
+        return 1
+    
+    # 가로로 한번만 진행
+    for col in range(n):
+        queen[row] = col
+        # for-else 구문
+        for i in range(row):
+            # 세로로 겹치면 안됨
+            if queen[i] == queen[row]:
+                break
+            # 대각선으로 겹치면 안됨
+            if abs(queen[i]-queen[row]) == row - i:
+                break
+        else:
+            count += dfs(queen, row + 1, n)
+    return count
+
+def solution(n):
+    return dfs([0]*n, 0, n)
