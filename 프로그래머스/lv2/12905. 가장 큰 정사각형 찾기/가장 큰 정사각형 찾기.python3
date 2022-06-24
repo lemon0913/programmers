@@ -1,0 +1,14 @@
+# 얘도 감이 안 옴...얘도 dfs/bfs 일까..???ㅠㅜㅠㅜ
+# dfs/bfs아님...굳이 따지자면 그리디 아닐까..??
+def solution(board):
+    answer = 0 if sum([sum(b) for b in board]) == 0 else 1
+    
+    for i in range(1,len(board)):
+        for j in range(1,len(board[i])):
+            if board[i][j]:
+                board[i][j] = min(board[i][j-1],board[i-1][j-1],board[i-1][j]) + 1
+                
+                if board[i][j] > answer:
+                    answer = board[i][j]
+
+    return answer ** 2
