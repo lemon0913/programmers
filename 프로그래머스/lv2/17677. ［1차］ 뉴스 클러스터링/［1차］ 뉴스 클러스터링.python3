@@ -1,5 +1,5 @@
+# 놀랍게도 한번에 풀이 안보고 품...근데 효율적인 풀이인지는 잘 모르겠네..???????
 def solution(str1, str2):
-
     
     # 대소문자는 구별 안한다고 했으니 일단 다 대문자로 바꾸자
     str1 = str1.upper()
@@ -42,3 +42,26 @@ def solution(str1, str2):
         
         
     return answer
+
+
+
+# 남의 풀인데 괜찮은 것 같음..!
+# def solution(str1, str2):
+
+#     list1 = [str1[n:n+2].lower() for n in range(len(str1)-1) if str1[n:n+2].isalpha()]
+#     list2 = [str2[n:n+2].lower() for n in range(len(str2)-1) if str2[n:n+2].isalpha()]
+
+#     tlist = set(list1) | set(list2)
+#     res1 = [] #합집합
+#     res2 = [] #교집합
+
+#     if tlist:
+#         for i in tlist:
+#             res1.extend([i]*max(list1.count(i), list2.count(i)))
+#             res2.extend([i]*min(list1.count(i), list2.count(i)))
+
+#         answer = int(len(res2)/len(res1)*65536)
+#         return answer
+
+#     else:
+#         return 65536
