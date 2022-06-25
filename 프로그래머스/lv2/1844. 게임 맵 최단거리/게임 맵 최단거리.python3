@@ -1,3 +1,4 @@
+# 기본 bfs 유형의 문제였다..금방 풀었음...
 from collections import deque
 def solution(maps):
     
@@ -25,6 +26,3 @@ def solution(maps):
         return -1
     else:
         return maps[n-1][m-1]
-    
-    
- 
