@@ -1,48 +1,52 @@
 # 좀 오래 걸렸지만 남의 풀이 안보고 정답!!
-def solution(msg):
-    answer = []
+# def solution(msg):
+#     answer = []
     
-    dic = {'A':1, 'B':2, 'C':3, 'D':4, 'E':5, 'F':6, 'G':7, 'H':8, 'I':9, 'J':10, 'K':11, 'L':12, 'M':13, 'N':14, 'O':15, 'P':16, 'Q':17, 'R':18, 'S':19, 'T':20, 'U':21, 'V':22, 'W':23, 'X':24, 'Y':25, 'Z':26}
+#     dic = {'A':1, 'B':2, 'C':3, 'D':4, 'E':5, 'F':6, 'G':7, 'H':8, 'I':9, 'J':10, 'K':11, 'L':12, 'M':13, 'N':14, 'O':15, 'P':16, 'Q':17, 'R':18, 'S':19, 'T':20, 'U':21, 'V':22, 'W':23, 'X':24, 'Y':25, 'Z':26}
     
-    l = len(msg)
-    i = 0
-    a = 1
-    cnt = 27
-    while True:
-        while msg[i:i+a] in dic:
-            if i+a == l: 
-                break
-            a += 1
+#     l = len(msg)
+#     i = 0
+#     a = 1
+#     cnt = 27
+#     while True:
+#         while msg[i:i+a] in dic:
+#             if i+a == l: 
+#                 break
+#             a += 1
         
         
-        if i+a == l and msg[i:i+a] in dic:
-            answer.append(dic[msg[i:i+a]])
-            break
+#         if i+a == l and msg[i:i+a] in dic:
+#             answer.append(dic[msg[i:i+a]])
+#             break
                 
         
         
-        answer.append(dic[msg[i:i+a-1]])
-        dic[msg[i:i+a]] = cnt
+#         answer.append(dic[msg[i:i+a-1]])
+#         dic[msg[i:i+a]] = cnt
 
+#         cnt += 1
+#         i = i + a - 1
+#         a = 1        
+    
+#     return answer
+
+# 훨씬 깔끔한 남의 풀이
+def solution(msg):
+    answer = []
+    dic = {'A':1, 'B':2, 'C':3, 'D':4, 'E':5, 'F':6, 'G':7, 'H':8, 'I':9, 'J':10, 'K':11, 'L':12, 'M':13, 'N':14, 'O':15, 'P':16, 'Q':17, 'R':18, 'S':19, 'T':20, 'U':21, 'V':22, 'W':23, 'X':24, 'Y':25, 'Z':26}
+    
+    cnt = 27
+    while msg:
+        idx = 1
+        while msg[:idx] in dic and idx <= len(msg):
+            idx += 1
+        
+        idx -= 1
+        answer.append(dic[msg[:idx]])
+        dic[msg[:idx+1]] = cnt
         cnt += 1
-        i = i + a - 1
-        a = 1        
+        msg = msg[idx:]
+    
+    
     
     return answer
-
-# 참고할 만한 남의 풀이
-# def solution(msg):
-#     answer = []
-#     tmp = {chr(e + 64): e for e in range(1, 27)}
-#     num = 27
-#     while msg:
-#         tt = 1
-#         while msg[:tt] in tmp.keys() and tt <= msg.__len__():
-#             tt += 1
-#         tt -= 1
-#         if msg[:tt] in tmp.keys():
-#             answer.append(tmp[msg[:tt]])
-#             tmp[msg[:tt + 1]] = num
-#             num += 1
-#         msg = msg[tt:]
-#     return answer
