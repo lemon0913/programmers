@@ -1,3 +1,4 @@
+# 걍 쉬웠다..!
 def solution(cacheSize, cities):
     answer = 0
     cache = []
