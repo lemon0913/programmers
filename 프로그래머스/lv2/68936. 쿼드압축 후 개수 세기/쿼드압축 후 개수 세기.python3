@@ -1,3 +1,5 @@
+# 남의 풀이 안보고 스스로 해결!!
+
 # 배열이 주어졌을 때 그걸 4등분해서 s배열에 저장
 def slice(s, array):
     n = len(array)//2
@@ -32,26 +34,26 @@ def solution(arr):
     while s:
         now = s.pop(0)
         flag = True
-        t = now[0][0]
+        t = now[0][0] # 비교 기준이 되는 원소
         l = len(now)
         
-        
+        # now의 원소들 중 하나라도 t와 다르면 flag는 False
         for i in range(l):
             for j in range(l):
                 if now[i][j] != t:
                     flag = False
                     break
         
-        if flag:
+        if flag: # flag가 True면 answer에 t를 넣기
             answer.append(t)
-        else:
-            if l>2:
-                slice(s,now)
-            else:
+        else: # flag가 False면
+            if l>2: # now가 2*2 배열보다 클 경우
+                slice(s,now) # 4등분해서 s에 넣기
+            else: # now에 2*2 배열인 경우 더 쪼개면 안됨, now의 모든 원소를 answer에 넣기
                 for i in range(2):
                     for j in range(2):
                         answer.append(now[i][j])
                         
       
-    
+    # answer에 저장된 0과 1의 개수 각각 출력
     return [answer.count(0), answer.count(1)]
