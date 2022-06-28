@@ -1,0 +1,57 @@
+# 배열이 주어졌을 때 그걸 4등분해서 s배열에 저장
+def slice(s, array):
+    n = len(array)//2
+    
+    a = []
+    for i in range(n):
+        a.append(array[i][:n])
+    s.append(a)
+    
+    a = []
+    for i in range(n):
+        a.append(array[i][n:])
+    s.append(a)
+    
+    a = []
+    for i in range(n, 2*n):
+        a.append(array[i][:n])
+    s.append(a)
+    
+    a = []
+    for i in range(n, 2*n):
+        a.append(array[i][n:])
+    s.append(a)
+
+    
+def solution(arr):
+    answer = []
+    s = []
+    s.append(arr)
+    
+    
+    while s:
+        now = s.pop(0)
+        flag = True
+        t = now[0][0]
+        l = len(now)
+        
+        
+        for i in range(l):
+            for j in range(l):
+                if now[i][j] != t:
+                    flag = False
+                    break
+        
+        if flag:
+            answer.append(t)
+        else:
+            if l>2:
+                slice(s,now)
+            else:
+                for i in range(2):
+                    for j in range(2):
+                        answer.append(now[i][j])
+                        
+      
+    
+    return [answer.count(0), answer.count(1)]
