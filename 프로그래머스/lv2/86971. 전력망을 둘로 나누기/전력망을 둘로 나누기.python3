@@ -1,0 +1,39 @@
+# 또또또 bfs!!!!!!
+# 전선을 하나씩 끊어보고, 한 쪽만 BFS로 탐색하며 한 쪽 전력망에 속한 송전탑의 개수를 세어보고 남은 송전탑들과 얼마나 차이나는지 비교하면 된다.
+# 타인의 풀이를 참고함..ㅎ
+from collections import deque
+def bfs(graph, start, visited):
+    q = deque([start])
+    visited[start] = True
+    cnt = 1
+    
+    while q:
+        v = q.popleft()
+        for x in graph[v]:
+            if not visited[x]:
+                cnt += 1
+                visited[x] = True
+                q.append(x)
+    
+    return cnt
+
+def solution(n, wires):
+    
+   
+    graph = [[] for _ in range(n+1)]
+    for w in wires:
+        a, b = w
+        graph[a].append(b)
+        graph[b].append(a)
+    
+    answer = n
+    for start, not_visit in wires:
+        visited = [False]*(n+1)
+        visited[not_visit] = True
+        result = bfs(graph, start, visited)
+        if abs(n-result-result) < answer:
+            answer = abs(n-result-result)
+    
+    
+    return answer
+
