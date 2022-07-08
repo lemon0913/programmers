@@ -1,61 +1,55 @@
 from collections import deque
-import copy
-if __name__ == "__main__":
+from itertools import combinations
+from copy import deepcopy
 
-    N, M = map(int, input().split())
-    graph = []
-    for _ in range(N):
-        graph.append(list(map(int, input().split())))
-    
-    answer = [] # bfs를 돌릴 때 마다 0의 개수 저장하는 배열
-    
-    def bfs():
-        q = deque()
-        tmp = copy.deepcopy(graph)
-        for i in range(N):
-            for j in range(M):
-                if tmp[i][j] == 2:
-                    q.append((i,j))
-        
-        dx = [-1, 1, 0, 0]
-        dy = [0, 0, -1, 1]
-        while q:
-            x, y = q.popleft()
-            for i in range(4):
-                nx = x + dx[i]
-                ny = y + dy[i]
+N, M = map(int, input().split())
+graph = []
+for _ in range(N):
+    graph.append(list(map(int, input().split())))
 
-                if nx < 0 or N <= nx or ny < 0 or M <= ny:
-                    continue
-                if tmp[nx][ny] == 0:
-                    tmp[nx][ny] = 2
+
+result = []
+def bfs(t_graph):
+    q = deque([])
+    for i in range(N):
+        for j in range(M):
+            if t_graph[i][j] == 2:
+                q.append((i,j))
+
+    dx = [-1, 1, 0, 0]
+    dy = [0, 0, -1, 1]
+    while q:
+        x, y = q.popleft()
+        for i in range(4):
+            nx = x + dx[i]
+            ny = y + dy[i]
+            if 0 <= nx < N and 0 <= ny < M:
+                if t_graph[nx][ny] == 0:
+                    t_graph[nx][ny] = 2
                     q.append((nx,ny))
-
-        # 0의 개수 세기
-        cnt = 0
-        for i in range(N):
-            cnt += tmp[i].count(0)
-        answer.append(cnt)
-
-        # x 다른 bfs 연산을 위해 x 초기화
-        x = 0
     
-    
-    
-    # 벽을 세우는 함수
-    ####### 이 부분이 이해 안됨...........########
-    def wall(x):
-        if x == 3:
-            bfs()
-            return
-        
-        for i in range(N):
-            for j in range(M):
-                if graph[i][j] == 0:
-                    graph[i][j] = 1
-                    wall(x+1)
-                    graph[i][j] = 0
+    cnt = 0
+    for i in range(N):
+        for j in range(M):
+            if t_graph[i][j] == 0:
+                cnt += 1
+    result.append(cnt)
+
+c = []
+for a in range(N):
+    for b in range(M):
+        c.append((a,b))
+
+# 벽을 세울 위치 3군데를 조합으로 구하기
+com = list(combinations(c, 3))
+
+for x,y,z in com:
+    t_graph = deepcopy(graph)
+    if t_graph[x[0]][x[1]] == 0 and t_graph[y[0]][y[1]] == 0 and t_graph[z[0]][z[1]] == 0:
+        t_graph[x[0]][x[1]] = 1
+        t_graph[y[0]][y[1]] = 1
+        t_graph[z[0]][z[1]] = 1
+        bfs(t_graph)
 
 
-    wall(0)
-    print(max(answer))
+print(max(result))
