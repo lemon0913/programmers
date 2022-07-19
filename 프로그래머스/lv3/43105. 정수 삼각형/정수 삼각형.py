@@ -1,3 +1,4 @@
+# 걍 쉽게 푼 듯..??
 def solution(triangle):
     
     for i in range(1, len(triangle)):
