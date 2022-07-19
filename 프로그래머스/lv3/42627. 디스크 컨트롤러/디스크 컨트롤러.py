@@ -1,42 +1,43 @@
 # 85점짜리 풀이....뭐가 틀린것인가...ㅠㅜ
-# import heapq
-# def solution(jobs):
-#     end = 0
-#     answer = 0
-#     h = []
-#     l = len(jobs)
+import heapq
+def solution(jobs):
+    end = 0
+    answer = 0
+    h = []
+    l = len(jobs)
       
-      # jobs 배열을 작업이 요청되는 시점 기준으로 오름차순으로 정렬
-#     jobs.sort(key = lambda x:x[0]) 
+    # jobs 배열을 작업이 요청되는 시점 기준으로 오름차순으로 정렬
+    # 이거 빼먹으니까 15점 나오더라;;
+    jobs.sort(key = lambda x:x[0]) 
 
     
-#     # 맨 처음에는 하드디스크가 작업을 수행하고 있지 않으니 가장 첫번째 요청을 일단 처리하자
-#     t = jobs.pop(0)
-#     end += t[0]+t[1]
-#     answer += t[1]
+    # 맨 처음에는 하드디스크가 작업을 수행하고 있지 않으니 가장 첫번째 요청을 일단 처리하자
+    t = jobs.pop(0)
+    end += t[0]+t[1]
+    answer += t[1]
     
-#     while jobs:
+    while jobs:
         
-#         if jobs[0][0] <= end or len(h) == 0:
-#             t = jobs.pop(0)
-#             heapq.heappush(h, (t[1], t[0]))
-#         else:
-#             while end <= jobs[0][0]:
-#                 time, come = heapq.heappop(h)
-#                 end += time
-#                 answer += (end-come)
+        if jobs[0][0] <= end or len(h) == 0:
+            t = jobs.pop(0)
+            heapq.heappush(h, (t[1], t[0]))
+        else:
+            while end <= jobs[0][0]:
+                time, come = heapq.heappop(h)
+                end += time
+                answer += (end-come)
     
-#     while h:
-#         time, come = heapq.heappop(h)
-#         end += time
-#         answer += (end-come)  
+    while h:
+        time, come = heapq.heappop(h)
+        end += time
+        answer += (end-come)  
         
     
-#     return answer//l
+    return answer//l
 
 
 
-
+# 남의 풀인데...이해 잘 안됨..그냥 85점에서 끝내버리자..
 # https://soohyun6879.tistory.com/136
 import heapq
 def solution(jobs):
