@@ -24,11 +24,12 @@ def solution(n, computers):
                         q.append(x)
             return flag
     
+    
+    
     answer = 0
     for i in range(1, n+1):
         flag = False
         if bfs(flag, i) == True:
-            print(i)
             answer += 1
            
         
