@@ -1,3 +1,4 @@
+# 풀이 참고 없이 잘 푼 것 같다..!
 from collections import deque
 def solution(n, computers):
        
@@ -11,7 +12,6 @@ def solution(n, computers):
     
     def bfs(flag, start):
         if not visited[start]:
-            print(flag)
             visited[start] = True
             flag = True
             q = deque([start])
@@ -21,15 +21,12 @@ def solution(n, computers):
                 for x in graph[v]:
                     if not visited[x]:
                         visited[x] = True
-                        # flag = True
                         q.append(x)
             return flag
     
     answer = 0
     for i in range(1, n+1):
         flag = False
-        # bfs(flag, i)
-        # if flag == True:
         if bfs(flag, i) == True:
             print(i)
             answer += 1
