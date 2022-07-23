@@ -32,6 +32,7 @@
 
 
 
+# 타인 참고 풀이
 def solution(m, n, puddles):
     puddles = [[q,p] for [p,q] in puddles]      # 미리 puddles 좌표 거꾸로
     dp = [[0] * (m + 1) for i in range(n + 1)]  # dp 초기화
@@ -47,19 +48,3 @@ def solution(m, n, puddles):
     return dp[n][m]
 
 
-# def solution(m, n, puddles):
-    
-    
-#     graph = [[0]*m for _ in range(n)]
-#     graph[0][0] = 1
-
-#     for j in range(n):
-#         for i in range(m):
-#             if j == 0 and i == 0:
-#                 continue
-#             if [i,j] in puddles:
-#                 graph[j][i] = 0
-#             else:
-#                 graph[j][i] = (graph[j-1][i]+graph[j][i-1])%1000000007
-                    
-#     return graph[n-1][m-1]
