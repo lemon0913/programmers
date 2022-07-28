@@ -1,3 +1,4 @@
+# 이거 원래 못 풀던 유형이였는데 너무 잘 풀어버림!!!!! 뿌듯하다!!!
 import heapq
 def solution(begin, target, words):
     l = len(begin) # 각 단어의 길이
