@@ -4,11 +4,11 @@
 
 ### 성능 요약
 
-메모리: 122832 KB, 시간: 368 ms
+메모리: 118064 KB, 시간: 220 ms
 
 ### 분류
 
-0-1 너비 우선 탐색(0_1_bfs), 너비 우선 탐색(bfs), 자료 구조(data_structures), 다익스트라(dijkstra), 그래프 이론(graphs), 그래프 탐색(graph_traversal)
+0-1 너비 우선 탐색(0_1_bfs), 너비 우선 탐색(bfs), 다익스트라(dijkstra), 그래프 이론(graphs), 그래프 탐색(graph_traversal)
 
 ### 문제 설명
 

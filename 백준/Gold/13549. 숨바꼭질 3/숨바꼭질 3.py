@@ -1,35 +1,26 @@
-import heapq
-INF = int(1e9)
+from collections import deque
+MAX = 100001
+check = [False] * MAX
+dist = [-1] * MAX
 
-if __name__ == "__main__":
-    N, K = map(int, input().split())
-    visited = [INF]*100001
+n,k = map(int, input().split())
+q = deque()
+q.append(n)
+check[n] = True
+dist[n] = 0
 
-    # 다익스트라 알고리즘 수행
-    q = []
-    visited[N] = 0
-    heapq.heappush(q, (0, N))
-    while q:
-        dist, now = heapq.heappop(q)
-        if visited[now] < dist:
-            continue
-        
-        if 0 <= now+1 <= 100000:
-            cost = dist + 1
-            if cost < visited[now+1]:
-                visited[now+1] = cost
-                heapq.heappush(q, (cost, now+1))
-
-        if 0 <= now-1 <= 100000:
-            cost = dist + 1
-            if cost < visited[now-1]:
-                visited[now-1] = cost
-                heapq.heappush(q, (cost, now-1))
-
-        if 0 <= now*2 <= 100000:
-            cost = dist
-            if cost < visited[now*2]:
-                visited[now*2] = cost
-                heapq.heappush(q, (cost, now*2))
-
-    print(visited[K])
+while q:
+    now = q.popleft()
+    if now*2 < MAX and check[now*2] == False:  # 순간이동
+        q.appendleft(now*2)
+        check[now*2] = True
+        dist[now*2] = dist[now]
+    if now + 1 < MAX and check[now+1] == False: # x+1이동
+        q.append(now+1)
+        check[now+1] = True
+        dist[now+1] = dist[now] + 1
+    if now - 1 >= 0 and check[now-1] == False: # x-1이동
+        q.append(now-1)
+        check[now-1] = True
+        dist[now-1] = dist[now] + 1
+print(dist[k])
