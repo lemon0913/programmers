@@ -1,26 +1,22 @@
 from collections import deque
-MAX = 100001
-check = [False] * MAX
-dist = [-1] * MAX
 
-n,k = map(int, input().split())
+n, k = map(int, input().split())  # n: 수빈이가 있는 위치, k: 동생이 있는 위치
 q = deque()
-q.append(n)
-check[n] = True
-dist[n] = 0
+q.append(n) 
+visited = [-1 for _ in range(100001)]
+visited[n] = 0
 
 while q:
-    now = q.popleft()
-    if now*2 < MAX and check[now*2] == False:  # 순간이동
-        q.appendleft(now*2)
-        check[now*2] = True
-        dist[now*2] = dist[now]
-    if now + 1 < MAX and check[now+1] == False: # x+1이동
-        q.append(now+1)
-        check[now+1] = True
-        dist[now+1] = dist[now] + 1
-    if now - 1 >= 0 and check[now-1] == False: # x-1이동
-        q.append(now-1)
-        check[now-1] = True
-        dist[now-1] = dist[now] + 1
-print(dist[k])
+    s = q.popleft()
+    if s == k:
+        print(visited[s])
+        break
+    if 0 <= s-1 < 100001 and visited[s-1] == -1:
+        visited[s-1] = visited[s] + 1
+        q.append(s-1)
+    if 0 < s*2 < 100001 and visited[s*2] == -1:
+        visited[s*2] = visited[s]
+        q.appendleft(s*2)  # 2*s 가 다른 연산보다 더 높은 우선순위를 가지기 위함
+    if 0 <= s+1 < 100001 and visited[s+1] == -1:
+        visited[s+1] = visited[s] + 1
+        q.append(s+1)
