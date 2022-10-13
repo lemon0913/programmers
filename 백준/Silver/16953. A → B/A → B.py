@@ -1,26 +1,25 @@
-from collections import deque
-if __name__ == "__main__":
-    A, B = map(int, input().split())
+INF = int(1e9)
 
+A, B = map(int, input().split())
+
+result = INF
+def dfs(x, cnt):
+    global result
+
+    if x == B:
+        if cnt < result:
+            result = cnt
+        return
+    elif x > B:
+        return
     
-    def bfs(start, end):
-        q = deque([(start, 1)])
-        
+    dfs(x*2, cnt+1)
+    dfs(int(str(x)+'1'), cnt+1)
 
-        while q:
-            v, cnt = q.popleft()
-            t1 = 2*v
-            t2 = int(str(v)+'1')
+dfs(A, 0)
 
-            if t1 == end or t2 == end:
-                return cnt+1
-            else:
-                if t2 < end :
-                    q.append((t2, cnt+1))
-                if t1 < end :
-                    q.append((t1, cnt+1))
-            
-        
-        return -1
-    
-    print(bfs(A, B))
+
+if result == INF:
+    print(-1)
+else:
+    print(result+1) 
