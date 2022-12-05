@@ -1,56 +1,85 @@
 N = int(input())
-
-arr = []
+stu = []
 for _ in range(N*N):
-    arr.append(list(map(int, input().split())))
+    stu.append(list(map(int, input().split())))
 
 graph = [[0]*N for _ in range(N)]
 
-graph[1][1] = arr[0][0]
-visited = {} # 학생의 좌표를 저장
-visited[arr[0][0]] = (1,1)
+graph[1][1] = stu[0][0]
 
-dx = [-1, 1, 0, 0]
-dy = [0, 0, 1, -1]
-for i in range(1, N*N):
-    fav = arr[i][1:5]
-    dic = {}
+dx = [0,0,-1,1]
+dy = [1,-1,0,0]
+for i in range(1,N*N):
+    like = stu[i][1:]
+
+    # 비어있는 칸 중에서 좋아하는 학생이 인접한 칸에 가장 많은 칸 구하기
+    tmp = []
+    m = 0
     for x in range(N):
         for y in range(N):
-            fav_c = 0
-            emp_c = 0
             if graph[x][y] == 0:
-                for j in range(4):
-                    nx = x + dx[j]
-                    ny = y + dy[j]
+                cnt = 0
+                for a in range(4):
+                    nx = x + dx[a]
+                    ny = y + dy[a]
                     if 0 <= nx < N and 0 <= ny < N:
-                        if graph[nx][ny] in fav:
-                            fav_c += 1
-                        if graph[nx][ny] == 0:
-                            emp_c += 1
-            
-                dic[(x,y)] = (fav_c, emp_c)
+                        if graph[nx][ny] in like:
+                            cnt += 1              
+                m = max(m,cnt)
+                tmp.append((x,y,cnt))
+    near = []
+    for a in range(len(tmp)):
+        if tmp[a][2] == m:
+            near.append((tmp[a][0],tmp[a][1]))
     
-    
-    result = sorted(dic.items(), key = lambda x:(-x[1][0], -x[1][1], x[0][0], x[0][1]))
-    x, y = result[0][0]
-    graph[x][y] = arr[i][0]
-    visited[arr[i][0]] = (x,y)
+    # 좋아하는 학생이 인접한 칸에 가장 많은 칸의 갯수가 1개라면 조건에 1에 의해 결정남
+    if len(near) == 1:
+        graph[near[0][0]][near[0][1]] = stu[i][0]
+    else: # 2개 이상이라면 조건 2에 의해 판별해야 함
+        # 1을 만족하는 칸 중에서 비어있는 칸이 가장 많은 칸 구하기
+        tmp = []
+        m = 0
+        for x,y in near:
+            cnt = 0
+            for a in range(4):
+                nx = x + dx[a]
+                ny = y + dy[a]
+                if 0 <= nx < N and 0 <= ny < N:
+                    if graph[nx][ny] == 0:
+                        cnt += 1
+            m = max(m,cnt)
+            tmp.append((x,y,cnt))
+        
+        # empty = []
+        # for a in range(len(tmp)):
+        #     if tmp[a][2] == m:
+        #         empty.append((tmp[a][0], tmp[a][1]))
+        
+        # # 빈 칸이 인접한 칸에 가장 많은 칸의 갯수가 1개라면 조건 2에 의해 결정남
+        # if len(empty) == 1:
+        # graph[empty[0][0]][empty[0][1]] = str[i][0]
+        for a in range(len(tmp)):
+            if tmp[a][2] == m:
+                graph[tmp[a][0]][tmp[a][1]] = stu[i][0]
+                break
+        
 
 
-answer = 0
-scores = [0, 1, 10, 100, 1000]
-for a in arr:
-    c = 0
-    now = a[0]
-    fav = a[1:5]
-    x, y = visited[now]
-    for i in range(4):
-        nx = x + dx[i]
-        ny = y + dy[i]
-        if 0 <= nx < N and 0 <= ny < N:
-            if graph[nx][ny] in fav:
-                c += 1
-    answer += scores[c]
+stu.sort(key = lambda x:x[0])
 
-print(answer)
+sm = 0
+score = [0,1,10,100,1000]
+for x in range(N):
+    for y in range(N):
+        s = graph[x][y]
+        like = stu[s-1][1:]
+        cnt = 0
+        for i in range(4):
+            nx = x + dx[i]
+            ny = y + dy[i]
+            if 0 <= nx < N and 0 <= ny < N:
+                if graph[nx][ny] in like:
+                    cnt += 1
+        sm += score[cnt]
+
+print(sm)
