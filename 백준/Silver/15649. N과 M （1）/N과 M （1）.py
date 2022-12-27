@@ -1,12 +1,14 @@
-from itertools import permutations
-
 N, M = map(int, input().split())
 
-arr = list(range(1, N+1))
+def dfs(s):
+    if len(s) == M:
+        print(' '.join(map(str,s)))
+        return
+    
+    for i in range(1,N+1):
+        if i not in s:
+            s.append(i)
+            dfs(s)
+            s.pop()
 
-results = list(permutations(arr,M))
-
-for result in results:
-    for r in result:
-        print(r, end=' ')
-    print()
+dfs([])
