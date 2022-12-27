@@ -1,17 +1,13 @@
-
-
 N, M = map(int, input().split())
 
-s = []
-
-def dfs(start):
+def dfs(x,s):
     if len(s) == M:
         print(' '.join(map(str,s)))
         return
+    
+    for i in range(x,N+1):
+            s.append(i)
+            dfs(i,s)
+            s.pop()
 
-    for i in range(start, N+1):
-        s.append(i)
-        dfs(i)
-        s.pop()
-
-dfs(1)
+dfs(1,[])
