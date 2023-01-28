@@ -4,11 +4,11 @@
 
 ### 성능 요약
 
-메모리: 113248 KB, 시간: 112 ms
+메모리: 113112 KB, 시간: 112 ms
 
 ### 분류
 
-비트마스킹(bitmask), 브루트포스 알고리즘(bruteforcing)
+백트래킹(backtracking), 비트마스킹(bitmask), 브루트포스 알고리즘(bruteforcing)
 
 ### 문제 설명
 
