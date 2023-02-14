@@ -1,44 +1,44 @@
 import sys
+input = sys.stdin.readline
 from collections import deque
-if __name__ == "__main__":
-    N, M, V = map(int, input().split())
-    graph = [[] for _ in range(N+1)]
-    for i in range(M):
-        x, y = map(int, sys.stdin.readline().split())
-        graph[x].append(y)
-        graph[y].append(x)
 
-    # 조건 중에 방문할 수 있는 정점이 여러개인 경우 정점 번호가 작은것을 먼저 방문한다고 함
-    # -> graph를 정렬하는 과정이 필요
-    for i in range(1, N+1):
-        graph[i].sort()
+N, M, V = map(int, input().split())
+graph = [[] for i in range(N+1)]
+for i in range(M):
+    a, b = map(int, input().split())
+    graph[a].append(b)
+    graph[b].append(a)
 
-    # dfs 함수 부분
-    visited = [False] * (N+1)
-    def dfs(v):
-        visited[v] = True
-        print(v, end=' ')
+# 방문할 수 있는 점이 여러개인 경우 정점 번호가 작은 것을 먼저 방문
+for i in range(N+1):
+    graph[i].sort()
 
+def dfs(start):
+    visited[start] = True
+    print(start, end = ' ')
+
+    for i in graph[start]:
+        if not visited[i]:
+            dfs(i)
+
+def bfs(start):
+    print(start, end = ' ')
+    visited[start] = True
+    queue = deque()
+    queue.append(start)
+
+    while queue:
+        v = queue.popleft()
         for i in graph[v]:
             if not visited[i]:
-                dfs(i)
-    
-    dfs(V)
-    print()
-
-    # bfs 함수 부분
-    visited = [False] * (N+1)
-    def bfs(start):
-        visited[start] = True
-        queue = deque([start])
-
-        while queue:
-            v = queue.popleft()
-            print(v, end = ' ')
-            for i in graph[v]:
-                if not visited[i]:
-                    queue.append(i)
-                    visited[i] = True
+                print(i, end=' ')
+                visited[i] = True
+                queue.append(i)
 
 
-    bfs(V)
+visited = [False]*(N+1)
+dfs(V)
+print()
+
+visited = [False]*(N+1)
+bfs(V)
