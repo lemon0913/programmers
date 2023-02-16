@@ -1,53 +1,50 @@
+# 테두리 4면을 돌아가면서 채우면 됨
 
 n = int(input())
 x = int(input())
 
+graph = [[0]*n for _ in range(n)]
 
-result = [[0]*n for _ in range(n)]
 
-l = n - 1
-c = 0
-num = n*n
-while l > 0:
-    
-    # 1
-    for i in range(l):
-        result[c+i][c] = num
-        num -= 1
+i = 0
+l = n-1
+nn = n*n
+while nn > 1:
 
-    # 2
-    for i in range(l):
-        result[n-1-c][c+i] = num
-        num -= 1
-    
-    # 3
-    for i in range(l):
-        result[n-1-c-i][n-1-c] = num
-        num -= 1
-    
-    # 4
-    for i in range(l):
-        result[c][n-1-c-i] = num
-        num -= 1
-    
+    # 왼쪽 면
+    for j in range(l):
+        graph[i+j][i] = nn
+        nn -= 1
+
+
+    # 아랫 면
+    for j in range(l):
+        graph[n-1-i][i+j] = nn
+        nn -= 1
+
+
+    # 오른쪽 면
+    for j in range(l):
+        graph[n-1-i-j][n-1-i] = nn
+        nn -= 1
+
+
+    # 윗 면
+    for j in range(l):
+        graph[i][n-1-i-j] = nn
+        nn -= 1
+
+    i += 1
     l -= 2
-    c += 1
 
-result[n//2][n//2] = 1
+graph[n//2][n//2] = 1
 
-
+a = b = 0
 for i in range(n):
-    print(' '.join(map(str,result[i])))
-
-a = b = -1
-flag = False
-for i in range(n):
-    if x in result[i]:
-        b = result[i].index(x)
+    tmp = graph[i]
+    if x in tmp:
         a = i
-        flag = True
-        break
-    
-    if flag:
-        break
-print(a+1, b+1)
+        b = tmp.index(x)
+    print(' '.join(map(str,tmp)))
+
+print(a+1,b+1)
