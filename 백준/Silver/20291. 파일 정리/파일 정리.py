@@ -1,15 +1,14 @@
-
 n = int(input())
-file = {}
+dic = {}
 for _ in range(n):
-    tmp = list(map(str,input().split('.')))
+    a,b = input().split('.')
 
-    if tmp[1] not in file:
-        file[tmp[1]] = 1
+    if b not in dic:
+        dic[b] = 1
     else:
-        file[tmp[1]] += 1
+        dic[b] += 1
 
-result = sorted(file.items(), key = lambda x:x[0])
+result = sorted(dic.items(), key = lambda x:x[0])
 
-for t,c in result:
-    print(t, c)
+for r in result:
+    print(r[0], r[1])
