@@ -1,41 +1,44 @@
 import sys
+input = sys.stdin.readline
+
 if __name__ == "__main__":
     N = int(input())
     graph = []
     for i in range(N):
-        graph.append(list(map(int, sys.stdin.readline().replace('\n', ''))))
+        graph.append(list(map(int, input().replace('\n', ''))))
+    
+    visited = [[False]*N for _ in range(N)]
 
+
+    dx = [-1, 1, 0, 0]
+    dy = [0, 0, -1, 1]
 
     def dfs(x, y):
-        # 주어진 범위를 벗어나면 종료
-        if x < 0 or y < 0 or x >= N or y >= N:
-            return False
-        # 현재 노드를 방문하지 않았다면
+        global cnt
+        visited[x][y] = True
         if graph[x][y] == 1:
-            # count는 1 증가
-            global count
-            count += 1
-            # 방문 처리 하기
-            graph[x][y] = 0
+            cnt += 1
+        
+        for i in range(4):
+            nx = x + dx[i]
+            ny = y + dy[i]
+            
+            if 0 <= nx < N and 0 <= ny < N:
+                if visited[nx][ny] == False and graph[nx][ny] == 1:
+                    dfs(nx, ny)
+    
 
-            dfs(x-1, y)
-            dfs(x, y-1)
-            dfs(x+1, y)
-            dfs(x, y+1)
-            return True
-        return False
+    cnt = 0
+    house = []
 
-    result = 0 # 단지 수
-    count = 0 # 단지 내의 집의 수
-    num = [] # 단지 내의 집의 수를 저장하는 리스트
     for i in range(N):
         for j in range(N):
-            if dfs(i, j) == True:
-                num.append(count) 
-                result += 1 # 단지 수 1 증가
-                count = 0 # 단지 내의 집의 수는 리셋하기
-
-    num.sort()
-    print(result)
-    for i in num:
+            if graph[i][j] == 1 and visited[i][j] == False:
+                dfs(i, j)
+                house.append(cnt)
+                cnt = 0
+    
+    house.sort()
+    print(len(house))
+    for i in house:
         print(i)
