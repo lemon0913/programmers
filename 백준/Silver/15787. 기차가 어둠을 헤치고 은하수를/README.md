@@ -4,7 +4,7 @@
 
 ### 성능 요약
 
-메모리: 216464 KB, 시간: 1544 ms
+메모리: 183796 KB, 시간: 1436 ms
 
 ### 분류
 
@@ -33,7 +33,7 @@
 
 <p>예를 들면, 다음 그림을 예로 들었을 때, 1번째 기차와 같이 승객이 앉은 상태는 기록되지 않았기 때문에 은하수를 건널 수있다. 2번째 기차와 같은 상태도 기록되지 않았기 때문에 2번째 기차도 은하수를 건널 수 있다. 3번째 기차는 1번째 기차와 승객이 앉은 상태가 같으므로 은하수를 건널 수 없다.</p>
 
-<p style="text-align: center;"><img alt="" src="https://onlinejudgeimages.s3-ap-northeast-1.amazonaws.com/problem/15787/1.png" style="width: 392px; height: 213px;"></p>
+<p style="text-align: center;"><img alt="" src="" style="width: 392px; height: 213px;"></p>
 
 <p>처음에 주어지는 기차에는 아무도 사람이 타지 않는다.</p>
 
