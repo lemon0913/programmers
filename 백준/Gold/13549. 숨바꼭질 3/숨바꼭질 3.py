@@ -1,31 +1,31 @@
 from collections import deque
-INF = int(1e9)
 
-N, K = map(int, input().split())
+n, k = map(int, input().split())
 
-visited = [-1]*100001
+visited = [-1]*(100001)
 
-def bfs(start):
-
-    visited[start] = 0
-    q = deque([start])    
+dx = [-1,1]
+def bfs(s,e):
+    visited[s] = 0
+    q = deque([s])
 
     while q:
-
         x = q.popleft()
-      
-        y = x*2
-        if 0 <= y <= 100000:
-            if visited[y] == -1:
-                visited[y] = visited[x]
-                q.appendleft(y)
+        # 종료조건
+        if x == e:
+            return visited[x]
+        
+        # 1) 순간이동을 하는 경우
+        nx = 2*x
+        if 0 <= nx <= 100000 and visited[nx] == -1:
+            visited[nx] = visited[x]
+            q.appendleft(nx)
+        # 2) 걷는 경우
+        for i in range(2):
+            nx = x + dx[i]
+            if 0 <= nx <= 100000 and visited[nx] == -1:
+                visited[nx] = visited[x] + 1
+                q.append(nx)
 
-        for y in [x+1, x-1]:
-            if 0 <= y <= 100000:
-                if visited[y] == -1:
-                    visited[y] = visited[x]+1
-                    q.append(y)
 
-bfs(N)
-
-print(visited[K])
+print(bfs(n,k))
