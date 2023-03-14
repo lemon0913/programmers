@@ -1,15 +1,15 @@
-if __name__ == "__main__":
-    H, W = map(int, input().split())
-    heights = list(map(int, input().split()))
 
-    answer = 0
-    for i in range(1, W-1):
-        left_max = max(heights[:i])
-        right_max = max(heights[i+1:])
+h,w = map(int, input().split())
+block = list(map(int, input().split()))
 
-        compare = min(left_max, right_max)
+result = 0
 
-        if heights[i] < compare:
-            answer += (compare-heights[i])
-    
-    print(answer)
+for i in range(1,w-1):
+    m1 = max(block[:i])
+    m2 = max(block[i+1:])
+    m = min(m1,m2)
+    if block[i] < m:
+        result += m - block[i]
+
+print(result)
+
