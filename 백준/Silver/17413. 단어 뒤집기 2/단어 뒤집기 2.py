@@ -1,72 +1,37 @@
+# <를 만나면 flip을 False & 모은 문자열 뒤집어 넣기
+# >를 만나면 frip을 True & 모은 문자열 집어넣기
+# 공백을 만나면 모은 문자열 집어 넣기
 
 
-# sen = input()
-# result = ''
+str = input()
 
-# flag = False
-# tmp1 = '' # 안 뒤집어 넣음
-# tmp2 = '' # 뒤집어 넣음
-# for s in sen:
-#     if s == '<':
-#         flag = True
-#         # tmp1 += '<'
-    
-#     if s == '>':
-#         flag = False
-#         tmp1 += '>'
-#         result += tmp1
-#         tmp1 = ''
-    
-#     if flag: # 태그 안이라면?
-#         tmp1 += s
-    
-#     if not flag: # 태그 밖이라면?
-#         if s == ' ':
-#             result += tmp2[::-1]
-#             tmp2 = ''
-#             result += ' '
-        
-#         elif s == '<':
-#             result += tmp2[::-1]
-#             tmp2 = ''
-
-#         else:
-#             tmp2 += s  
-
-# result += tmp2[::-1]
-# print(result)
-
-
-
-
-
-sen = input()
-
-
-flag = False
-word = ''
 result = ''
-
-for s in sen:
-    # 뒤집어서 출력
-    if not flag:
-        if s == '<':
-            flag = True
-            word += s
-        
-        elif s == ' ':
-            word += s
-            result += word
-            word = ''
+flip = True
+tmp = ''
+for s in str:
+    if s == '<':
+        flip = False
+        result += tmp[::-1]
+        tmp = ''
+        result += s
+    elif s == '>':
+        flip = True
+        result += tmp
+        tmp = ''
+        result += s
+    elif s == ' ':
+        if flip:
+            result += tmp[::-1]
         else:
-            word = s + word
-    
-    # 정상적으로 출력
+            result += tmp
+        tmp = ''
+        result += s
     else:
-        word += s
-        if s == '>':
-            flag = False
-            result += word
-            word=''
+        tmp += s
 
-print(result+word)
+if flip:
+    result += tmp[::-1]
+else:
+    result += tmp
+print(result)        
+
