@@ -1,14 +1,23 @@
-if __name__ == "__main__":
-    N = int(input())
-    count = N
 
-    for _ in range(N):
-        word = input()
-        for i in range(0, len(word)-1):
-            if word[i] == word[i+1]:
-                pass
-            elif word[i] in word[i+1:]:
-                count -= 1
+N = int(input())
+
+words = []
+for _ in range(N):
+    words.append(input())
+
+cnt = 0
+for word in words:
+    s = set()
+    s.add(word[0])
+    for i in range(1, len(word)):
+        if word[i] not in s:
+            s.add(word[i])
+        else:
+            if word[i] == word[i-1]:
+                continue
+            else:
                 break
+    else:
+        cnt += 1
 
-    print(count)
+print(cnt)
