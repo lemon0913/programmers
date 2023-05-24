@@ -1,9 +1,9 @@
-from collections import defaultdict
+# from collections import defaultdict
 import sys
 input = sys.stdin.readline
 
 n,k = map(int, input().split())
-ice = defaultdict(int)
+ice = [0]*1000001
 maxI = -1
 minI = 1000001
 for i in range(n):
